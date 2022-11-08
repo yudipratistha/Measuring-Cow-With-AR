@@ -3,7 +3,6 @@ package com.measuring_cow_with_ar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -66,7 +65,7 @@ public class EntryActivity extends AppCompatActivity {
             return;
         }else {
             // TODO go
-            startActivity(new Intent(this, MeasureActivity.class));
+            startActivity(new Intent(this, MeasuringCowWithArActivity.class));
         }
     }
 

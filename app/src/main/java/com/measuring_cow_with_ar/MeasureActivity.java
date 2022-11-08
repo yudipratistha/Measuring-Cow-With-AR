@@ -1,6 +1,5 @@
 package com.measuring_cow_with_ar;
 
-import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.util.Log;

@@ -140,14 +140,26 @@ public class MeasuringCowWithArActivity extends AppCompatActivity{
         }
     }
 
-    private void logStatus(String msg){
-        try {
-            if (firebaseCrashlytics != null) {
-                firebaseCrashlytics.log(msg);
-            }
-        }catch (Exception e){
-            log(e);
-        }
+//    private void logStatus(String msg){
+//        try {
+//            if (firebaseCrashlytics != null) {
+//                firebaseCrashlytics.log(msg);
+//            }
+//        }catch (Exception e){
+//            log(e);
+//        }
+//    }
+    private long pressedTime;
+    @Override
+    public void onBackPressed() {
+        finish();
+//        if (pressedTime + 2000 > System.currentTimeMillis()) {
+//            super.onBackPressed();
+//            finish();
+//        } else {
+//            Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+//        }
+//        pressedTime = System.currentTimeMillis();
     }
 
     //    OverlayView overlayViewForTest;
@@ -187,9 +199,8 @@ public class MeasuringCowWithArActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        firebaseCrashlytics = FirebaseCrashlytics.getInstance();
+//        firebaseCrashlytics = FirebaseCrashlytics.getInstance();
         setContentView(R.layout.activity_main);
-
 //        overlayViewForTest = (OverlayView)findViewById(R.id.overlay_for_test);
         tv_result = findViewById(R.id.tv_result);
         fab = findViewById(R.id.fab);
@@ -202,7 +213,7 @@ public class MeasuringCowWithArActivity extends AppCompatActivity{
                 public void onClick(View view) {
                     try {
                         int index = Integer.valueOf(view.getTag().toString());
-                        logStatus("click index cube: " + index);
+//                        logStatus("click index cube: " + index);
                         glSerfaceRenderer.setNowTouchingPointIndex(index);
                         glSerfaceRenderer.showMoreAction();
                     }catch (Exception e){
@@ -215,7 +226,7 @@ public class MeasuringCowWithArActivity extends AppCompatActivity{
         fab.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                logStatus("click fab");
+//                logStatus("click fab");
                 PopupWindow popUp = getPopupWindow();
 //                popUp.showAsDropDown(v, 0, 0); // show popup like dropdown list
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -264,7 +275,7 @@ public class MeasuringCowWithArActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        logStatus("onResume()");
+//        logStatus("onResume()");
         if (session == null) {
             Exception exception = null;
             String message = null;
@@ -330,7 +341,7 @@ public class MeasuringCowWithArActivity extends AppCompatActivity{
     @Override
     public void onPause() {
         super.onPause();
-        logStatus("onPause()");
+//        logStatus("onPause()");
         if (session != null) {
             // Note that the order matters - GLSurfaceView is paused first so that it does not try
             // to query the session. If Session is paused before GLSurfaceView, GLSurfaceView may
@@ -344,7 +355,7 @@ public class MeasuringCowWithArActivity extends AppCompatActivity{
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
         super.onRequestPermissionsResult(requestCode, permissions, results);
-        logStatus("onRequestPermissionsResult()");
+//        logStatus("onRequestPermissionsResult()");
         Toast.makeText(this, R.string.need_permission, Toast.LENGTH_LONG)
                 .show();
         if (!CameraPermissionHelper.shouldShowRequestPermissionRationale(this)) {
@@ -357,7 +368,7 @@ public class MeasuringCowWithArActivity extends AppCompatActivity{
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        logStatus("onWindowFocusChanged()");
+//        logStatus("onWindowFocusChanged()");
         if (hasFocus) {
             // Standard Android full-screen functionality.
             getWindow().getDecorView().setSystemUiVisibility(
@@ -528,7 +539,7 @@ public class MeasuringCowWithArActivity extends AppCompatActivity{
 
         @Override
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-            logStatus("onSurfaceCreated()");
+//            logStatus("onSurfaceCreated()");
             GLES20.glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
             // Create the texture and pass it to ARCore session to be filled during update().
@@ -558,10 +569,10 @@ public class MeasuringCowWithArActivity extends AppCompatActivity{
         @Override
         public void onSurfaceChanged(GL10 gl, int width, int height) {
             if(width <= 0 || height <= 0){
-                logStatus("onSurfaceChanged(), <= 0");
+//                logStatus("onSurfaceChanged(), <= 0");
                 return;
             }
-            logStatus("onSurfaceChanged()");
+//            logStatus("onSurfaceChanged()");
 
             displayRotationHelper.onSurfaceChanged(width, height);
             GLES20.glViewport(0, 0, width, height);
@@ -571,7 +582,7 @@ public class MeasuringCowWithArActivity extends AppCompatActivity{
         }
 
         public void deleteNowSelection(){
-            logStatus("deleteNowSelection()");
+//            logStatus("deleteNowSelection()");
             int index = nowTouchingPointIndex;
             if (index > -1){
                 if(index < anchors.size()) {
@@ -588,7 +599,7 @@ public class MeasuringCowWithArActivity extends AppCompatActivity{
         }
 
         public void setNowSelectionAsFirst(){
-            logStatus("setNowSelectionAsFirst()");
+//            logStatus("setNowSelectionAsFirst()");
             int index = nowTouchingPointIndex;
             if (index > -1 && index < anchors.size()) {
                 if(index < anchors.size()){
